@@ -3,9 +3,28 @@
 @section('content')
 <h1>User</h1>
 <hr>
+
+@if(session('result') == 'success')
+<div class="alert alert-success alert-dismissible fade show">
+	<strong>Saved!</strong> Berhasil disimpan.
+	<button type="button" class="close" data-dismiss="alert">
+		&times;
+	</button>
+</div>
+@endif
+
+@if(session('result') == 'update')
+<div class="alert alert-success alert-dismissible fade show">
+	<strong>Update!</strong> Berhasil diupdate.
+	<button type="button" class="close" data-dismiss="alert">
+		&times;
+	</button>
+</div>
+@endif
+
 <div class="row">
 	<div class="col-md-6 mb-3">
-		<a href="#" class="btn btn-primary">[+] Tambah</a>
+		<a href="{{ route('admin.user.add') }}" class="btn btn-primary">[+] Tambah</a>
 	</div>
 
 	<div class="col-md-6 mb-3">
@@ -27,14 +46,16 @@
 </div>
 <table class="table table-striped mb-3">
 	<tr>
-		<th>Name</th><th>Email</th><th>&nbsp;</th>
+		<th>Name</th><th>Email</th><th>Akses</th><th>&nbsp;</th>
 	</tr>
 	@foreach($data as $dt)
 	<tr>
 		<td>{{ $dt->name }}</td>
 		<td>{{ $dt->email}}</td>
+		<td>{{ $dt->akses}}</td>
 		<td>
-			<a href="#" class="btn btn-success btn-sm">
+			<a href="{{ route('admin.user.edit',['id'=>$dt->id]) }}" 
+			class="btn btn-success btn-sm">
 				<i class="fa fa-w fa-edit"></i>
 			</a>
 
